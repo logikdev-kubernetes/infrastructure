@@ -1,0 +1,55 @@
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+    name: authelia
+spec:
+    routes:
+        - kind: Rule
+          match: ENC[AES256_GCM,data:VjzGqg/Xy0s3b4CgjYUTQF44v0WJgBpPIKwcNF4nfk+H4EXQtny0UYEbqw==,iv:ffe68raOYU2gkECE8v3G7VToNFFUeIvzXft7b5cMmW0=,tag:yUuKB7zAEuyBSebj1AlxAA==,type:str]
+          middlewares:
+            - name: chain-authelia
+              namespace: authelia
+          priority: 10
+          services:
+            - kind: Service
+              name: authelia
+              namespace: authelia
+              passHostHeader: true
+              port: 80
+              responseForwarding:
+                flushInterval: 100ms
+              scheme: http
+              strategy: RoundRobin
+              weight: 10
+sops:
+    kms: []
+    gcp_kms: []
+    azure_kv: []
+    hc_vault: []
+    age: []
+    lastmodified: "2023-09-03T18:52:42Z"
+    mac: ENC[AES256_GCM,data:nJJMm1RiQATYfjlgugRr7AvAmndaxD6Kf7XiLT1zZS/+SBACHoD1L5Dexi9rKwh4drmji+/8gy+pmEynFlroJViOSmJczDI9LEO/T4Vo5woo8bQFBwZwYjfUbEq5hMd40icCBMhmpjf7zdKBu9QwS3zegk5vFh56TVHUZ873VgI=,iv:VJjPXpbHv2tcWmPGzCVA6PoPw5x4quqo+qlIlyy6xYs=,tag:5kyCYJ149ab97wrxP4xCpQ==,type:str]
+    pgp:
+        - created_at: "2023-09-03T18:52:41Z"
+          enc: |
+            -----BEGIN PGP MESSAGE-----
+
+            hQIMAyyGYy7YCFAQAQ//YHQjLat3Uu8eLambSK/Hm0TbOTamyWYtwTRRZn5eJtzt
+            XEDX+rvAP3JF6JZOrBpwM2SNzKnTvlLFcFKrSROE7uxk72iWCVUPsJjxbwzyIX/9
+            cYksGT4JNPWYl38Eh3/LU+3xaJuOhGy68MgiYONEcPmflo1E8LslHeqGa2eNVHJb
+            qfgPs5enHkaEDWWMixXKx/y2LirrNt+AdJalmwawa5TtZBjYr4Jiq8g6xymgd3gG
+            ukf7CjunaQgFsn3buN7Y0gRiEzioOJ1YCgyNYz4gCsA5R/GOHG6bIzVVMyU7LUdS
+            muQRlbBZqz5U+gR9U2Uwes/7n3WEvJeEhTgB5ctESb+gQi9FehkELLuyXqos1dpB
+            rw1oUnYU6mBI4skKtyamojI92OIwBL4yC6OOmXDXVStq/zo7B53pMTCCIaIRp2WC
+            YCOX+qUPEb96eKtrDA7ZvOlsuHad/T1GP12VexC9c7JaWBVPjOU8wtOi0MurlH1K
+            pAmltTl8YEXH84KRcCcGGhEqYFj+7MVBvihhLMBvIpdhbVWJxpc0smWvPa7XqZD0
+            IyRzvd3x0wRedxcYZNZnI76rOHuczNI5as7URGF0ECb0xHo40bbzejFfILYOkarQ
+            Kz0rDkSWw3cbGY6BMZY/uD6oz1jK1YqSsZyIopYQm0P/imG7TDOn8H+4R9Vd2KvU
+            aAEJAhDIC5u4m60rppym2J0uFwZGlvArpztEcNfMnrGFExGNrslCOcgflxl4Mo3B
+            tJUru1R33PqV4rK+nljkEJ0RHLq0BUT92nj1maGrr+QyZVhxusnA6FYbbCHocm60
+            uuk1ACcIOSJb
+            =ZOeX
+            -----END PGP MESSAGE-----
+          fp: 75C3F62D6A9AA2165875F5C680A364E41D3C47AF
+    encrypted_regex: ^(match)$
+    version: 3.7.3

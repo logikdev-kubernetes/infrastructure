@@ -1,0 +1,18 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: authelia
+spec:
+  interval: 5m
+  chart:
+    spec:
+      chart: authelia
+      version: '>=4.37.5'
+      sourceRef:
+        kind: HelmRepository
+        name: authelia
+        namespace: authelia
+      interval: 1m
+  valuesFrom:
+  - kind: Secret
+    name: authelia-values
