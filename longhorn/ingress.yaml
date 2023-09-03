@@ -17,5 +17,5 @@ spec:
         pathType: Prefix
   tls:
   - hosts:
-    - longhorn-frontend.longhorn-system.svc.cluster.local
+    - longhorn.cluster.local
     secretName: longhorn-tls
