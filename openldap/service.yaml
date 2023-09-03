@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: openldap
+spec:
+  type: ClusterIP
+  ports:
+    - port: 1636
+      targetPort: 1636 
+      name: ldaps
+    - port: 1389
+      targetPort: 1389 
+      name: ldap
+  selector:
+    app: openldap

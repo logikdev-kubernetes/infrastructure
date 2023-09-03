@@ -1,0 +1,56 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: openldap
+spec:
+  selector:
+    matchLabels:
+      app: openldap
+  serviceName: openldap
+  template:
+    metadata:
+      labels:
+        app: openldap
+    spec:
+      securityContext:
+        runAsGroup: 0
+        runAsUser: 0
+        runAsNonRoot: false
+      terminationGracePeriodSeconds: 10
+      containers:
+      - name: openldap
+        image: bitnami/openldap
+        volumeMounts:
+          - name: ldap-tls
+            mountPath: /opt/bitnami/openldap/certs
+          - name: ldap
+            mountPath: /bitnami/openldap
+        ports:
+        - containerPort: 1389
+        - containerPort: 1636 
+        resources:
+          limits:
+            memory: "500Mi"
+            cpu: "250m"
+        envFrom:
+        - configMapRef:
+            name: ldap-env
+        - secretRef:
+            name: openldap-secrets
+      volumes:
+      - name: ldap-tls
+        secret:
+          secretName: ldap-tls
+  volumeClaimTemplates:
+  - metadata:
+      name: ldap
+    spec:
+      storageClassName: longhorn
+      accessModes: [ "ReadWriteOnce" ]
+      resources:
+        requests:
+          storage: 500Mi
+          
+
+        
+    
