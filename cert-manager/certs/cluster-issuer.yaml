@@ -1,0 +1,52 @@
+apiVersion: cert-manager.io/v1
+kind: ClusterIssuer
+metadata:
+    name: letsencrypt-production
+    namespace: cert-manager
+spec:
+    acme:
+        server: https://acme-v02.api.letsencrypt.org/directory
+        privateKeySecretRef:
+            name: letsencrypt-production
+        solvers:
+            - dns01:
+                cloudflare:
+                    email: ENC[AES256_GCM,data:6cWX28USsyiN5BvUHYYkwOQviYE=,iv:EAxa8hS/BODz8OtR1kGRu1VosKgiVRGoUIOZT4ckBzs=,tag:ZPAHJ0Qdkbf71+zTreVddQ==,type:str]
+                    apiKeySecretRef:
+                        name: cloudflare-secret
+                        key: apikey
+              selector:
+                dnsZones:
+                    - ENC[AES256_GCM,data:dkpDlW3VU87waws=,iv:amJU/SANHnnJNYHptJX8m4Hwlt6jpHxptzBm/29EeQ8=,tag:OJmrxpYidVZSEewqaJ2JXw==,type:str]
+sops:
+    kms: []
+    gcp_kms: []
+    azure_kv: []
+    hc_vault: []
+    age: []
+    lastmodified: "2023-09-03T14:56:19Z"
+    mac: ENC[AES256_GCM,data:m3D5MTHapR5eFbv1E1I2wdmtkATqrrXpJexGJtTf0IRKA6OK7OxKLdc2wsmfAq0VPvaQzqKyzl+pylkD5bv42CZ9wfPJ1wAldsaFCXoD8GKG6Xwmg16j7PKJ5HRxqgKL5q7pZd9WB9O3pcT803qVUdK5LI6kSxl9Bf4WzbqdyVE=,iv:RYJIPsjrISvC53vqaG+nv0a/7RbziTtRrHP968iP0Cc=,tag:ur7CDaBlMrOrgfrSeeuLoQ==,type:str]
+    pgp:
+        - created_at: "2023-09-03T14:56:18Z"
+          enc: |
+            -----BEGIN PGP MESSAGE-----
+
+            hQIMAyyGYy7YCFAQAQ/+NajLv6IF57ZsFVordltyj3p9JJy5IQDRzulhKEkO5n3j
+            38N8fSnBbk/jVUmmNC7NXAHA2SC4RqRPuHu1X00rxjMlYA6opORRuFpGTLt4Kp6n
+            IOyhbKK/NtReL+EPB5CwVkQwHu+KvjtECnVgPbCChT3WjTtMHzCU8ufmtAcWqqlV
+            7Tx/UZ5MHww0mTChZzf/YX0atywQIwEXqkchadCcVXzs3kG3VdC+/JwQgkFRNCxy
+            xBe4PYXWP4SzkDcHplG3zIIYfNcF1R5Uc+rvRIniMAtHo83eA5Y/tC2ovIndq7aM
+            uEhnsNKLSKVKC9O+x6ZLpmb+7UasE2uWwV3sISgL0oAJzFk2HoOYvDtMyzJzRw47
+            SmPzWDKtSkMi9uhq5pum+4oLF0p9mT4P9v284oIMxrQ3GQPRxyGlhcYOv1+QKb9T
+            V0AN38RuQnxhBih9KtjycIjx0QGFkCDl5hGQb1mJhjs7/ooCfNJSvCry5ON1t0i0
+            7MJghI9HhCM+60+jPkd2PcGdx4dJIgNcnoVPD9zxS7vWKjIEn2af+eLf3NORSNMh
+            6hTZoUdcDrLY9amAWEm+ydT+GXLuVEa/CQi2JhwCxOk5kdN/SGvGXbXbeMIhmGJU
+            CCZtaB02Q5clBvVYCKkAB3LqtSCnwssD6HBM5UyVVu1V5S9R60vRCLLE4x9BZNbU
+            ZgEJAhA+mHn2bkO4uypAzwKTmkebn8CWT5zuLGwRopO1PZaN/HNNgdNf647FSq/H
+            iuHmt4bAPRMsHIVjcd9IphgHvbkUhKG7hRj2EToDmp6YezAHQRhgt1ctM+rD7iMe
+            8q6ve65VWw==
+            =RQ3v
+            -----END PGP MESSAGE-----
+          fp: 75C3F62D6A9AA2165875F5C680A364E41D3C47AF
+    encrypted_regex: email|dnsZones
+    version: 3.7.3
