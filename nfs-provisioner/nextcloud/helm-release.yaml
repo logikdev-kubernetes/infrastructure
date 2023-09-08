@@ -1,0 +1,16 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: nfs-nextcloud
+spec:
+  interval: 60m
+  chart:
+    spec:
+      chart: nfs-subdir-external-provisioner
+      sourceRef:
+        kind: HelmRepository
+        name: nfs-provisioner
+        namespace: nfs-provisioner
+  valuesFrom:
+    - kind: Secret
+      name: nfs-nextcloud-values

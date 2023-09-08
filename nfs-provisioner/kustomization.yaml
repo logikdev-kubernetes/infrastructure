@@ -4,11 +4,8 @@ namespace: nfs-provisioner
 resources:
   - namespace.yaml
   - repository.yaml
-  - helm-release.yaml
-secretGenerator:
-  - name: nfs-medias-values
-    files: 
-    - values.yaml=nfs-medias-values.enc.yaml
+  - ./medias
+  - ./nextcloud
 configurations:
   - "kustomizeconfig.yaml"
 
