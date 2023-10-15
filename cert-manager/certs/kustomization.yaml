@@ -6,3 +6,4 @@ resources:
   - public-issuer.yaml
   - ca-secrets.yaml
   - local-issuer.yaml
+  - certificate.yaml
