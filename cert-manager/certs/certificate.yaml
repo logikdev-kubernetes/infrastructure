@@ -3,7 +3,7 @@ kind: Certificate
 metadata:
     name: letsencrypt-tls
 spec:
-    secretName: letsencrypt-production
+    secretName: letsencrypt-tls
     dnsNames:
         - ENC[AES256_GCM,data:tTqlVhyF1VkxddtU7g==,iv:U3JNgGpH4+xB5MaUtoG0HcpU0RKauAS/sTM6jB9AE78=,tag:bcieLo4fr0k1jEl6FpzTOg==,type:str]
     issuerRef:
